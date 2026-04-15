@@ -1,75 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enhanced Phonics Learning App</title>
-    <script>
-        // Function to record audio
-        let mediaRecorder;
-        let audioChunks = [];
-        async function startRecording() {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            mediaRecorder = new MediaRecorder(stream);
-            mediaRecorder.start();
-            mediaRecorder.ondataavailable = event => {
-                audioChunks.push(event.data);
-            };
-        }
-        function stopRecording() {
-            return new Promise(resolve => {
-                mediaRecorder.onstop = () => {
-                    const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                    audioChunks = [];
-                    resolve(audioBlob);
-                };
-                mediaRecorder.stop();
-            });
-        }
-
-        // Function to save audio in local storage
-        function saveAudio(blob) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64data = reader.result;
-                localStorage.setItem('audio', base64data);
-            };
-            reader.readAsDataURL(blob);
-        }
-
-        // Function for file upload
-        function uploadFile() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.onchange = e => {
-                const file = e.target.files[0];
-                const reader = new FileReader();
-                reader.onload = () => {
-                    console.log('File uploaded:', reader.result);
-                };
-                reader.readAsText(file);
-            };
-            input.click();
-        }
-
-        // Function to check internet connectivity
-        function checkConnectivity() {
-            if (navigator.onLine) {
-                console.log('You are online');
-            } else {
-                console.log('You are offline');
-            }
-        }
-
-        window.addEventListener('online', checkConnectivity);
-        window.addEventListener('offline', checkConnectivity);
-    </script>
+    <script src="https://path-to-your-animations.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Enhanced Phonics Learning App</h1>
-    <button onclick="startRecording()">Start Recording</button>
-    <button onclick="stopRecording().then(saveAudio)">Stop Recording</button>
-    <button onclick="uploadFile()">Upload File</button>
-    <p>Check console for connectivity status.</p>
+    <header>
+        <h1>Enhanced Phonics Learning App</h1>
+    </header>
+    <main>
+        <section id="letter-data">
+            <h2>Letters</h2>
+            <!-- Letter data goes here -->
+        </section>
+        <section id="word-library">
+            <h2>Word Library</h2>
+            <!-- Word library content goes here -->
+        </section>
+        <section id="categories">
+            <h2>Categories</h2>
+            <!-- Categories go here -->
+        </section>
+        <section id="controls">
+            <button onclick="startRecording()">Record</button>
+            <button onclick="stopRecording()">Stop</button>
+            <button onclick="uploadFile()">Upload File</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 Enhanced Phonics Learning App</p>
+    </footer>
+    <script>
+        function startRecording() {
+            // Implement microphone recording
+        }
+        function stopRecording() {
+            // Implement stop recording
+        }
+        function uploadFile() {
+            // Implement file upload functionality
+        }
+        // Implement local storage functionality
+        // Check internet connectivity
+    </script>
 </body>
 </html>
